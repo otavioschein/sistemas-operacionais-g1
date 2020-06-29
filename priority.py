@@ -27,13 +27,12 @@ class PriorityFifo:
 
     def setChar(self, currTime):
         try:
-            print(currTime)
             max = -1 
             for i in range(len(self.queue)):
-                if self.queue[i].duration > 0 and max == -1: 
-                    max = i
                 if self.queue[i].duration > 0:
                     if self.queue[i].insertTime <= currTime: 
+                        if max == -1: 
+                            max = i
                         self.queue[i].chart += "-"
 
                         if self.queue[i].priority > self.queue[max].priority:
@@ -41,10 +40,11 @@ class PriorityFifo:
                     else:
                         self.queue[i].chart += "_"
 
-            # print(max)
-            self.queue[max].chart = self.queue[max].chart[:-1]
-            self.queue[max].chart += "@"
-            self.queue[max].duration -= 1
+            if max != -1:
+                self.queue[max].chart = self.queue[max].chart[:-1]
+                self.queue[max].chart += "@"
+                self.queue[max].duration -= 1
+
         except IndexError:
             print()
             exit()
