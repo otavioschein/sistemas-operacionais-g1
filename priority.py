@@ -38,11 +38,11 @@ class PriorityFifo:
                         if self.queue[i].priority > self.queue[max].priority:
                             max = i
                     else:
-                        self.queue[i].chart += "_"
+                        self.queue[i].chart += " "
 
             if max != -1:
                 self.queue[max].chart = self.queue[max].chart[:-1]
-                self.queue[max].chart += "@"
+                self.queue[max].chart += "="
                 self.queue[max].duration -= 1
 
         except IndexError:
